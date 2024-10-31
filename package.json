@@ -1,0 +1,20 @@
+{
+  "name": "dwpci-first-server",
+  "version": "1.0.0",
+  "description": "Primer servidor web basado en Node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://spindly-spooky-hobgoblin-g449gwqv95qrf9qrj.github.dev/"
+  },
+  "keywords": [
+    "node",
+    "pwpcI",
+    "itgam"
+  ],
+  "author": "@JazmariGonzalez",
+  "license": "MIT"
+}
