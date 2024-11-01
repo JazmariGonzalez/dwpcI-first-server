@@ -109,7 +109,7 @@ const server = http.createServer(async (req, res) => {
       break;
       // Continua con el defautl
     default:
-      // Peticion raiz
+       // Peticion raiz
       // Estableciendo cabeceras
       res.setHeader('Content-Type', 'text/html');
       // Escribiendo la respuesta
@@ -135,5 +135,5 @@ const server = http.createServer(async (req, res) => {
 }); 
 
 server.listen(3000, "0.0.0.0", () => {
-  console.log("👩‍🍳 Servidor escuchando en http://localhost:3000"); 
+  console.log("👩‍🍳 Servidor escuchando en http://localhost:3000");
 });
