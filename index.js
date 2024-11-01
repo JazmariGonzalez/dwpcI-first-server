@@ -98,18 +98,48 @@ const server = http.createServer(async (req, res) => {
     case "/message":
       // Verificando si es post
       if (method === "POST") {
-        // Procesa el formulario
-        res.statusCode = 200;
-        res.write("🎉 Endpoint Funcionando!!! 🎉");
+        // Se crea una variable para almacenar los
+		    // Datos entrantes del cliente
+        let body = "";
+        // Se registra un manejador de eventos
+        // Para la recepción de datos
+        req.on("data", (data => {
+          body += data;
+          if (body.length > 1e6) return req.socket.destroy();
+        }));
+        // Se registra una manejador de eventos
+		    // para el termino de recepción de datos
+        req.on("end", () => {
+          // Procesa el formulario
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "text/html");
+          const parsedParams = Object.fromEntries(params);
+          console.log(parsedParams);
+          res.write(`
+          <html>
+            <head>
+              <link rel="icon" type="image/x-icon" sizes="32x32" href="/favicon.ico">
+              <title>My App</title>
+            </head>
+            <body> 
+              <h1 style="color: #333">SERVER MESSAGE RECIEVED &#128172</h1>
+              <p>${parsedParams.message}</p>
+            </body>
+          </html>
+          `);
+          
+          // Se finaliza la conexion
+          return res.end();
+        })
       } else {
         res.statusCode = 404;
         res.write("404: Endpoint no encontrado")
+        res.end();
       }
-      res.end();
       break;
       // Continua con el defautl
     default:
-       // Peticion raiz
+      // Peticion raiz
       // Estableciendo cabeceras
       res.setHeader('Content-Type', 'text/html');
       // Escribiendo la respuesta
@@ -135,5 +165,5 @@ const server = http.createServer(async (req, res) => {
 }); 
 
 server.listen(3000, "0.0.0.0", () => {
-  console.log("👩‍🍳 Servidor escuchando en http://localhost:3000");
-});
+  console.log("👩‍🍳 Servidor escuchando en http://localhost:3000"); 
+}); 
